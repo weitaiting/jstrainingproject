@@ -76,7 +76,7 @@ class App extends React.Component {
   lookupName = (nameId) => {
     if (!this.state.names || !this.state.names[nameId]) {
       return {
-        name: '...'
+        name: 'loading...'
       };
     }
     return this.state.names[nameId];
