@@ -98,7 +98,7 @@ class App extends React.Component {
                 },
             })    
         )
-        .catch(
+        .catch(error =>
             this.setState({
                 serverErrorMessage: 'The server had an error. Please refresh the page or try again later!'
             })
