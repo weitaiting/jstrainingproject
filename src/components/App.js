@@ -82,23 +82,20 @@ class App extends React.Component {
     return this.state.names[nameId];
   };
 
-// ADD NAME START ****************************************
   addName = (newName, contestId) => {
     api.addName(newName, contestId)
-        .then(resp => {
-            if (resp.error == false) {
-                this.setState({
-                    contests: {
-                        ...this.state.contests,
-                        [resp.updatedContest._id]: resp.updatedContest
-                    },
-                    names: {
-                        ...this.state.names,
-                        [resp.newName._id]: resp.newName
-                    },
-                })
-            } 
-        })
+        .then(resp =>
+            this.setState({
+                contests: {
+                    ...this.state.contests,
+                    [resp.updatedContest._id]: resp.updatedContest
+                },
+                names: {
+                    ...this.state.names,
+                    [resp.newName._id]: resp.newName
+                },
+            })    
+        )
         .catch(console.error)
   };
   validateName = (inputtedName) => {
