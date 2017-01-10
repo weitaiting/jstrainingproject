@@ -3,7 +3,9 @@ import React, { Component, PropTypes } from 'react';
 class Contest extends Component {
   constructor () {
       super();
-      this.state = {warningMessage: ''}; 
+      this.state = {
+          warningMessage: '',
+      }; 
   }
   componentDidMount() {
     this.props.fetchNames(this.props.nameIds);
@@ -86,7 +88,7 @@ Contest.propTypes = {
   nameIds: PropTypes.array.isRequired,
   lookupName: PropTypes.func.isRequired,
   addName: PropTypes.func.isRequired,
-  validateName: PropTypes.func.isRequired,
+  validateName: PropTypes.func.isRequired
 };
 
 export default Contest;

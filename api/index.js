@@ -76,7 +76,6 @@ router.post('/names', (req, res) => {
         })
       )
     ).catch(error => { 
-        // Handle server error in a friendly way
         console.error(error);
         res.status(404).send('Bad Request');
     });

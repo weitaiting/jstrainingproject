@@ -67,10 +67,12 @@ class App extends React.Component {
     return this.state.contests[this.state.currentContestId];
   }
   pageHeader() {
+    if (this.state.serverErrorMessage) {
+        return this.state.serverErrorMessage;   
+    }
     if (this.state.currentContestId) {
       return this.currentContest().contestName;
     }
-
     return 'Naming Contests';
   }
   lookupName = (nameId) => {
@@ -96,7 +98,12 @@ class App extends React.Component {
                 },
             })    
         )
-        .catch(console.error)
+        .catch(
+            this.setState({
+                serverErrorMessage: 'The server had an error. Please refresh the page or try again later!'
+            })
+        )
+    
   };
   validateName = (inputtedName) => {
     var x = inputtedName.length;
@@ -110,6 +117,9 @@ class App extends React.Component {
   };
 
 currentContent() {
+    if (this.state.serverErrorMessage) {
+        return;
+    }
     if (this.state.currentContestId) {
       return <Contest
                contestListClick={this.fetchContestList}
