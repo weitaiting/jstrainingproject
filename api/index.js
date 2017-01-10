@@ -61,7 +61,7 @@ router.get('/contests/:contestId', (req, res) => {
 router.post('/names', (req, res) => {
   const contestId = ObjectID(req.body.contestId);
   const name = req.body.newName;
-  // Validation: Check that name is not empty, then send info.
+  // Validation: Check that name is NOT empty, then send info.
   if (name !== '') {
     mdb.collection('names').insertOne({ name }).then(result =>
       mdb.collection('contests').findAndModify(
@@ -72,15 +72,14 @@ router.post('/names', (req, res) => {
       ).then(doc =>
         res.send({
           updatedContest: doc.value,
-          newName: { _id: result.insertedId, name }
+          newName: { _id: result.insertedId, name },
         })
       )
-    ).catch(error => {
+    ).catch(error => { 
+        // Handle server error in a friendly way
         console.error(error);
         res.status(404).send('Bad Request');
     });
-  } else {
-    console.error('Name field cannot be blank. Please fill in a name.');
   }
 });
 
